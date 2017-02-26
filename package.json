@@ -2,7 +2,7 @@
     "name": "cfv1",
     "displayName": "cfv1",
     "description": "Coldfire V1 ASM Syntax",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "corytodd",
     "license": "SEE LICENSE",
     "icon": "images/cfv1.svg",
