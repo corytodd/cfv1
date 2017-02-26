@@ -11,16 +11,25 @@
         "Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "asm",
-            "aliases": ["Coldfire Assembly", "asm"],
-            "extensions": ["asm"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "asm",
-            "scopeName": "source.cfv1",
-            "path": "./syntaxes/asm.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "asm",
+                "aliases": [
+                    "Coldfire Assembly",
+                    "asm"
+                ],
+                "extensions": [
+                    "asm"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "asm",
+                "scopeName": "source.cfv1",
+                "path": "./syntaxes/asm.tmLanguage.json"
+            }
+        ]
     }
 }
