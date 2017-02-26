@@ -4,12 +4,26 @@
     "description": "Coldfire V1 ASM Syntax",
     "version": "0.0.1",
     "publisher": "corytodd",
+    "license": "SEE LICENSE",
+    "icon": "images/cfv1.svg",
+    "galleryBanner": {
+        "color": "#607D8B",
+        "theme": "dark"
+    },
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
         "Languages"
     ],
+    "keywords": [
+        "assembly",
+        "coldfire"
+    ],
+    "repository": {
+        "url": "https://github.com/corytodd/cfv1.git"
+    },
+    "homepage": "https://github.com/corytodd/cfv1/blob/master/README.md",
     "contributes": {
         "languages": [
             {
