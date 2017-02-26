@@ -1,7 +1,5 @@
 # Change Log
-All notable changes to the "cfv1" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+Change history for cfv1
 
 ## [Unreleased]
 - Initial release

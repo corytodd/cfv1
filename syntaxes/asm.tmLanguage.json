@@ -1,6 +1,7 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Coldfire Assembly",
+	"scopeName": "source.cfv1",
 	"patterns": [
 		{
 			"include": "#keywords"
@@ -24,6 +25,26 @@
 				"match": "^(\\.|_)[a-zA-Z_][a-zA-Z0-9_]*:?"
 				}				
 			]},
+		"strings": {
+			"name": "string.quoted.double.asm",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.asm",
+					"match": "\\\\."
+				},
+				{
+					"name": "string.quoted.cfv1",
+					"begin": "'",
+					"end": "'"
+				},
+				{
+					"match": "\\'\\S\\'",
+					"name": "string.char.cfv1"
+				}		
+			]
+		},			
 		"keywords": {
 			"patterns": [
 				{
@@ -165,7 +186,7 @@
 					}
 				},
 				{
-					"match": "\\b(?i)(db|dl))(?-i)\\s+(d[0-7])\\s*,\\s*\\.*([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"match": "\\b(?i)(db|dl)(?-i)\\s+(d[0-7])\\s*,\\s*\\.*([a-zA-Z_][a-zA-Z0-9_]*)\\b",
 					"captures": {
 						"1" : {  "name": "support.mnemonic.loop.cfv1"  },
 						"3" : {  "name": "storage.other.register.cfv1"  },
@@ -230,27 +251,6 @@
 					"match": "\\b(?i)((d[cs]|dcb)(.[sbwl])?|even|ifeq|ifne|ifgt|ifge|iflt|ifle|endif|endc|rept|endr|macro|endm|section|text|data|end|cnop|opt|machine|fpu)(?-i)\\b"
 				}
 			]
-		},
-		"strings": {
-			"name": "string.quoted.double.asm",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.asm",
-					"match": "\\\\."
-				},
-				{
-					"name": "string.quoted.cfv1",
-					"begin": "'",
-					"end": "'"
-				},
-				{
-					"match": "\\'\\S\\'",
-					"name": "string.char.cfv1"
-				}		
-			]
 		}
-	},
-	"scopeName": "source.cfv1"
+	}
 }
