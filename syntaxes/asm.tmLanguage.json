@@ -1,0 +1,256 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Coldfire Assembly",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#functions"
+		}
+	],
+	"repository": {
+		"functions" :{
+			"patterns": [
+				{
+				"name": "entity.name.function.cfv1",
+				"match": "^[a-zA-Z_][a-zA-Z0-9_]*:?"
+				},
+				{
+				"name": "entity.name.section.cfv1",
+				"match": "^(\\.|_)[a-zA-Z_][a-zA-Z0-9_]*:?"
+				}				
+			]},
+		"keywords": {
+			"patterns": [
+				{
+					"match": "(;|\\B\\*).*$",
+					"name": "comment.cfv1"
+				},
+				{
+					"name": "entity.variable.cfv1",
+					"match": "^[a-zA-Z_][a-zA-Z0-9_]*"
+				},
+				{
+					"match": "-?\\b[0-9]+\\b",
+					"name": "constant.numeric.dec.cfv1"
+				},
+				{
+					"match": "-?\\$[0-9a-fA-F]+\\b",
+					"name": "constant.numeric.hex.cfv1"
+				},
+				{
+					"match": "\\b(?i)([ad]([0-7])|sr|sp|pc|ccr)(?-i)\\b",
+					"name": "storage.other.register.cfv1"
+				},
+				{
+					"match": "\\b(?i)(usp|vbr|cacr|asid|mmubar|mbar)(?-i)\\b",
+					"name": "storage.other.register.privileged.cfv1"
+				},
+				{
+					"match": "\\b(?i)((move|movec|moveq)(\\.[bwl])?)\\s+([ad]([0-7])|(.+)),((usp|vbr|cacr)|(.+))?(?-i)\\b",
+					"captures": {
+						"2" : { "name": "support.mnemonic.privileged.cfv1" },
+						"3" : { "name": "support.mnemonic.size.cfv1" },
+						"4" : { "name": "storage.other.register.cfv1" },
+						"6" : { "name": "entity.name.function.cfv1" },
+						"7" : { "name": "entity.name.function.cfv1" },
+						"8" : { "name": "storage.other.register.privileged.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)(rti|stop(\\s+(#.+)?))(?-i)\\b",
+					"captures": {
+						"1" : { "name": "support.mnemonic.privileged.cfv1" },
+						"3" : { "name": "support.mnemonic.immediate.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)(move(\\.[bwl])?(\\s+(#.+)?(.+)?,(sr|usp)))(?-i)\\b",
+					"captures": {
+						"1" : { "name": "support.mnemonic.privileged.cfv1" },
+						"2" : { "name": "support.mnemonic.size.cfv1" },
+						"4" : { "name": "support.mnemonic.immediate.cfv1" },
+						"5" : { "name": "entity.name.function.cfv1" },
+						"6" : { "name": "storage.other.register.privileged.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)(move(\\.[bwl])?(\\s+(sr|usp),(.+)))(?-i)\\b",
+					"captures": {
+						"1" : { "name": "support.mnemonic.privileged.cfv1" },
+						"2" : { "name": "support.mnemonic.size.cfv1" },
+						"3" : { "name": "storage.other.register.cfv1" },
+						"4" : { "name": "storage.other.register.privileged.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)(cpush[lp])\\s+(dc|ic|bc),\\((a[0-7])(?-i)\\b",
+					"captures": {
+						"1" : { "name": "support.mnemonic.privileged.cfv1" },
+						"2" : { "name": "storage.other.register.privileged.cfv1" },
+						"3" : { "name": "storage.other.register.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)(cpusha)\\s+(dc|ic|bc)(?-i)\\b",
+					"captures": {
+					"1" : { "name": "support.mnemonic.privileged.cfv1" },
+					"2" : { "name": "storage.other.register.privileged.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)((andi|eori|ori)(\\.w)?(\\s+(.+),(sr)))(?-i)\\b",
+					"captures": {
+						"2" : { "name": "support.mnemonic.privileged.cfv1" },
+						"3" : { "name": "support.mnemonic.size.cfv1" },
+						"5" : { "name": "support.mnemonic.immediate.cfv1" },
+						"6" : { "name": "storage.other.register.privileged.cfv1" }
+					}
+				},
+				{
+					"match": "\\b(?i)([as]bcd(\\.b)?|(add|sub)[iqx]?(\\.[bwl])?|adda(\\.[wl])?|(and|eor|or)(i)?(\\.[bwl])?|b(chg|clr|set|tst)(\\.[bl])?|clr(\\.[bwl])?|cas(\\.[bwl])?|cmp[im2]?(\\.[bwl])?|cmpa(\\.[wl])?|illegal|lea(\\.l)?|link|muls|mulu|(negx?|not)(\\.[bwl])?|nop|pea(\\.l)?|rte|rts|s(f|t|cc|hs|cs|lo|eq|ge|gt|hi|le|ls|lt|mi|ne|pl|vc|vs)(\\.b)?|stop|swap(\\.l)?|tas(\\.b)?|trap|trapv|trap(f|t|cc|hs|cs|lo|eq|ge|gt|hi|le|ls|lt|mi|ne|pl|vc|vs)|tst|tst\\.b|tst\\.w|tst\\.l|unlk|unpk)(?-i)\\b",
+					"name": "support.mnemonic.cfv1"
+				},
+				{
+					"match" : "\\b(?i)(move(\\.[bwl])|movea(\\.[wl]))\\s+(#((\\$[0-9a-f]+)|(%[01]+)|([0-9]+))|.+),(.+)(?-i)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.cfv1" },
+						"2" : {  "name": "support.mnemonic.size.cfv1"  },
+						"3" : {  "name": "support.mnemonic.size.cfv1"  },
+						"4" : {  "name": "support.mnemonic.operand.source.cfv1"  },
+						"5" : {  "name": "support.mnemonic.operand.source.constant.cfv1"  },
+						"6" : {  "name": "support.mnemonic.operand.source.constant.hex.cfv1"  },
+						"7" : {  "name": "support.mnemonic.operand.source.constant.binary.cfv1"  },
+						"8" : {  "name": "support.mnemonic.operand.source.constant.decimal.cfv1"  },
+						"9" : {  "name": "storage.other.register.cfv1"  }
+					}
+				},
+				{
+					"match" : "\\b(?i)(movem|moveq)(\\.[wl])?",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.cfv1"  },
+						"2" : {  "name": "support.mnemonic.size.cfv1"  },
+						"3" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match" : "\\b(?i)(moveq)(\\.l)?\\s+#((\\$-?[0-9a-f]{1,3})|(%[0-1]{1,8})|-?([0-9]{1,3})),(d[0-7])(?-i)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.cfv1"  },
+						"2" : {  "name": "support.mnemonic.size.cfv1"  }, 
+						"3" : {  "name": "support.mnemonic.operand.source.constant.cfv1"  }, 
+						"4" : {  "name": "support.mnemonic.operand.source.constant.hex.cfv1"  },
+						"5" : {  "name": "support.mnemonic.operand.source.constant.binary.cfv1"  },
+						"6" : {  "name": "support.mnemonic.operand.source.constant.decimal.cfv1"  },
+						"7" : {  "name": "storage.other.register.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(b(ra|cc|hs|cs|lo|eq|ge|gt|hi|le|ls|lt|mi|ne|pl|vc|vs|sr)(\\.[sw])?)(?-i)\\s+(\\.?[a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.branch.cfv1"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(j(sr|mp))(?-i)\\s+((\\.?[a-zA-Z_][a-zA-Z0-9_]*)|\\$?\\d*\\((sp|pc|a[0-7])(,(d|a)[0-7](.(w|l))?(\\*[248])?)?\\))",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.branch.cfv1"  },
+						"3" : {  "name": "storage.other.register.cfv1"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(db|dl))(?-i)\\s+(d[0-7])\\s*,\\s*\\.*([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.loop.cfv1"  },
+						"3" : {  "name": "storage.other.register.cfv1"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(f(s|d)?(abs|add|sub|asub|tst|cmp|mul|move|neg|sqrt|int|intrz))(\\.[xbwlsd])?\\s+((fp[0-7])|.+)(,((fp[0-7])|.+))?(?-i)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.cfv1"  },
+						"4" : {  "name": "support.mnemonic.size.cfv1"  },
+						"5" : {  "name": "support.mnemonic.operand.source"  },
+						"6" : {  "name": "entity.name.function.cfv1"  },
+						"7" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(fmovem)(\\.[xl])?\\s+(.+),(.+)(?-i)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.cfv1"  },
+						"2" : {  "name": "support.mnemonic.size.cfv1"  },
+						"3" : {  "name": "support.mnemonic.operand.source"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)fnop(?-i)\\b",
+					"name": "support.mnemonic.cfv1"
+				},
+				{
+					"match": "\\b(?i)(fsave|frestore)\\s+((\\(a[0-7]|sp]\\))|.+)(?-i)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.privileged.cfv1"  },
+						"2" : {  "name": "support.mnemonic.operand.source"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(f([bs])?(f|eq|ogt|oge|olt|ole|ogl|or|un|ueq|ugt|uge|ult|ule|ne|t|seq|gt|ge|lt|le|gl|gle|ngle|ngl|nle|nlt|nge|ngt|sne|st|sf|seq))(?-i)\\s+(\\.?([a-zA-Z_][a-zA-Z0-9_]*))\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.branch.cfv1"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(fd([bs])?(f|eq|ogt|oge|olt|ole|ogl|or|un|ueq|ugt|uge|ult|ule|ne|t|seq|gt|ge|lt|le|gl|gle|ngle|ngl|nle|nlt|nge|ngt|sne|st|sf|seq))(?-i)\\s+((d[0-7])),(\\.?([a-zA-Z_][a-zA-Z0-9_]*))\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.branch.cfv1"  },
+						"5" : {  "name": "storage.other.register.cfv1"  },
+						"6" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"match": "\\b(?i)(ftrap(f|eq|ogt|oge|olt|ole|ogl|or|un|ueq|ugt|uge|ult|ule|ne|t|seq|gt|ge|lt|le|gl|gle|ngle|ngl|nle|nlt|nge|ngt|sne|st|sf|seq))(?-i)\\s+(fp[0-7]),(\\.?[a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"captures": {
+						"1" : {  "name": "support.mnemonic.branch.cfv1"  },
+						"3" : {  "name": "storage.other.register.cfv1"  },
+						"4" : {  "name": "entity.name.function.cfv1"  }
+					}
+				},
+				{
+					"name": "keyword.control.directive.cfv1",
+					"match": "\\b(?i)((d[cs]|dcb)(.[sbwl])?|even|ifeq|ifne|ifgt|ifge|iflt|ifle|endif|endc|rept|endr|macro|endm|section|text|data|end|cnop|opt|machine|fpu)(?-i)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.asm",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.asm",
+					"match": "\\\\."
+				},
+				{
+					"name": "string.quoted.cfv1",
+					"begin": "'",
+					"end": "'"
+				},
+				{
+					"match": "\\'\\S\\'",
+					"name": "string.char.cfv1"
+				}		
+			]
+		}
+	},
+	"scopeName": "source.cfv1"
+}

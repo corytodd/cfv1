@@ -1,0 +1,26 @@
+{
+    "name": "cfv1",
+    "displayName": "cfv1",
+    "description": "Coldfire V1 ASM Syntax",
+    "version": "0.0.1",
+    "publisher": "corytodd",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "asm",
+            "aliases": ["Coldfire Assembly", "asm"],
+            "extensions": ["asm"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "asm",
+            "scopeName": "source.cfv1",
+            "path": "./syntaxes/asm.tmLanguage.json"
+        }]
+    }
+}
