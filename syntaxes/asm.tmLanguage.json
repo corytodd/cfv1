@@ -1,5 +1,5 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"$schema": "https://raw.githubusercontent.com/corytodd/cfv1/master/syntaxes/asm.tmLanguage.json",
 	"name": "Coldfire Assembly",
 	"scopeName": "source.cfv1",
 	"patterns": [
