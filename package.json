@@ -2,10 +2,10 @@
     "name": "cfv1",
     "displayName": "cfv1",
     "description": "Coldfire V1 ASM Syntax",
-    "version": "0.0.2",
+    "version": "1.0.0",
     "publisher": "corytodd",
     "license": "SEE LICENSE",
-    "icon": "images/cfv1.svg",
+    "icon": "images/cfv1.png",
     "galleryBanner": {
         "color": "#607D8B",
         "theme": "dark"
@@ -14,7 +14,7 @@
         "vscode": "^1.5.0"
     },
     "categories": [
-        "Languages"
+        "Programming Languages"
     ],
     "keywords": [
         "assembly",
